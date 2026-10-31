@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Track Booking - Safar Wheels</title>
+  <meta name="description" content="Check the status of your Safar Wheels booking and see your stamp card.">
+  <meta name="theme-color" content="#0b1f33">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="track">
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div id="app">
+      <section class="page-head">
+        <div class="wrap">
+          <p class="eyebrow">Track booking</p>
+          <h1>Where is my booking?</h1>
+          <p class="lead">Type the mobile number you booked with. Your booking reference is optional.</p>
+        </div>
+      </section>
+
+      <section class="wrap sec tight track-wrap">
+        <form class="card" id="tf" novalidate>
+          <div class="two">
+            <label class="field"><span class="lbl">Mobile number</span>
+              <input type="tel" id="t-phone" inputmode="numeric" autocomplete="tel" maxlength="12" placeholder="03XX-XXXXXXX">
+            </label>
+            <label class="field"><span class="lbl">Booking reference <small>(optional)</small></span>
+              <input type="text" id="t-ref" maxlength="12" placeholder="SW-1001" autocapitalize="characters" autocomplete="off">
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary" id="t-go">Check my booking</button>
+          <p class="hint">With only your phone number we show your bookings from the last 90 days: the reference, car, dates and status. Nothing else.</p>
+        </form>
+
+        <div class="notice err-box2" id="t-msg" hidden></div>
+        <p class="live-note" id="t-live" hidden><i></i> <span>Updates by itself every 30 seconds</span></p>
+        <div id="t-list" class="t-list"></div>
+
+        <div class="card stamp-card" id="stamp-card" hidden></div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/track.js"></script>
+</body>
+</html>

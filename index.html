@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Safar Wheels - Car Rental in Lahore</title>
+  <meta name="description" content="Rent cars, vans and buses in Lahore with or without a driver. Pick your dates, see what is free, and book in minutes. Pay nothing online.">
+  <meta name="theme-color" content="#0b1f33">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="home">
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div id="app">
+
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-bg" aria-hidden="true">
+          <div class="hero-scene">
+            <div class="beam beam-1"></div>
+            <div class="beam beam-2"></div>
+            <div class="hero-car" id="hero-car"></div>
+          </div>
+        </div>
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Lahore - cars, vans &amp; buses</p>
+            <h1>Your next <em>safar</em> starts here.</h1>
+            <p class="lead">Pick your dates and see which cars are free. Self-drive or with a driver. Weddings, tours, airport runs and business trips. <b>You pay nothing online.</b></p>
+            <ul class="hero-points">
+              <li id="hp-disc"></li>
+              <li id="hp-hold"></li>
+              <li id="hp-stamp"></li>
+            </ul>
+          </div>
+
+          <form class="card search-card" id="hero-search" novalidate>
+            <h2>When do you need a car?</h2>
+            <div class="search-dates" aria-live="polite">
+              <div class="date-box"><small>Pickup</small><b id="sd-s">Choose a day</b></div>
+              <span class="date-arrow" aria-hidden="true"></span>
+              <div class="date-box"><small>Return</small><b id="sd-r">Choose a day</b></div>
+            </div>
+            <div id="hero-cal"></div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Show free cars</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- SEARCH RESULTS -->
+      <section class="wrap sec" id="results" hidden>
+        <div class="sec-head">
+          <h2 id="res-title">Free cars</h2>
+          <button type="button" class="btn btn-ghost btn-sm" id="res-close">Close results</button>
+        </div>
+        <p class="muted" id="res-sub"></p>
+        <div class="grid cars" id="res-grid"></div>
+      </section>
+
+      <!-- REBOOK -->
+      <div class="wrap" id="rebook"></div>
+
+      <!-- TRUCK ART LANE -->
+      <section class="truck-lane" aria-hidden="true">
+        <div class="bunting"></div>
+        <div class="lane-road"><div class="truck" id="truck"></div></div>
+      </section>
+
+      <!-- CATEGORIES -->
+      <section class="wrap sec">
+        <div class="sec-head">
+          <div><p class="eyebrow dark">Choose your ride</p><h2>What are you looking for?</h2></div>
+          <a class="btn btn-ghost" href="fleet.html">See the whole fleet</a>
+        </div>
+        <div class="cat-grid" id="cats"></div>
+      </section>
+
+      <!-- TRUST / SPEEDOMETERS -->
+      <section class="trust">
+        <div class="wrap">
+          <div class="gauges" id="gauges"></div>
+          <ul class="trust-list" id="trust"></ul>
+        </div>
+      </section>
+
+      <!-- FEATURED -->
+      <section class="wrap sec">
+        <div class="sec-head">
+          <div><p class="eyebrow dark">Popular right now</p><h2>Featured cars</h2></div>
+          <a class="btn btn-ghost" href="find.html">Not sure? Find my car</a>
+        </div>
+        <div class="grid cars" id="featured"></div>
+      </section>
+
+      <!-- ROAD + WHY -->
+      <section class="road-sec" id="road">
+        <div class="wrap">
+          <div class="sec-head center"><div><p class="eyebrow dark">Simple as 1-2-3-4</p><h2>The road to your trip</h2></div></div>
+          <div class="road-wrap">
+            <svg class="road-svg" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+              <path class="road-edge" d="M-10 220 C 120 60, 260 60, 360 170 S 600 300, 700 160 S 900 20, 1010 120" />
+              <path id="road-path" class="road-line" d="M-10 220 C 120 60, 260 60, 360 170 S 600 300, 700 160 S 900 20, 1010 120" />
+            </svg>
+            <div class="road-car" id="road-car"></div>
+          </div>
+          <ol class="steps">
+            <li><b>1</b><span>Pick your dates</span></li>
+            <li><b>2</b><span>Choose your car</span></li>
+            <li><b>3</b><span>Send your booking</span></li>
+            <li><b>4</b><span>We confirm and you drive away</span></li>
+          </ol>
+        </div>
+      </section>
+
+      <section class="wrap sec why">
+        <div class="sec-head center"><div><p class="eyebrow dark">Why Safar Wheels</p><h2>Rent with people who care</h2></div></div>
+        <div class="why-grid" id="why"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

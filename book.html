@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book a Car - Safar Wheels</title>
+  <meta name="description" content="Book a car in Lahore. Pick your dates on a live calendar, see the full price, and pay nothing online.">
+  <meta name="theme-color" content="#0b1f33">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="book">
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div id="app">
+      <section class="page-head">
+        <div class="wrap">
+          <p class="eyebrow">Book a car</p>
+          <h1>Let us get you moving</h1>
+          <p class="lead">You pay nothing online. We confirm by phone or WhatsApp, and you pay us directly.</p>
+        </div>
+      </section>
+
+      <section class="wrap sec tight" id="form-sec">
+        <div class="notice warn" id="closed" hidden></div>
+
+        <form id="bk" class="book-form" novalidate autocomplete="on">
+
+          <div class="steps-col">
+            <!-- 1. CAR -->
+            <fieldset class="card step">
+              <legend><span class="num">1</span> Choose your car</legend>
+              <label class="field"><span class="sr">Car</span>
+                <select id="car" name="car"></select>
+              </label>
+              <p class="err" id="e-car"></p>
+              <div id="car-prev" class="car-prev"></div>
+            </fieldset>
+
+            <!-- 2. DATES -->
+            <fieldset class="card step" id="step-dates">
+              <legend><span class="num">2</span> Pick your dates</legend>
+              <div id="cal"></div>
+              <p class="hint">Days are counted from the pickup date to the return date, and <b>both days count</b>. Example: 5 Nov to 7 Nov = 3 days.</p>
+              <p class="notice warn" id="busy-warn" hidden>We could not check the latest bookings right now. You can still send your booking: we check the dates again before saving it.</p>
+              <p class="err" id="e-dates"></p>
+            </fieldset>
+
+            <!-- 3. TRIP -->
+            <fieldset class="card step">
+              <legend><span class="num">3</span> Your trip</legend>
+
+              <div class="field">
+                <span class="lbl">Driver option</span>
+                <div class="seg" id="driver-seg" role="radiogroup" aria-label="Driver option"></div>
+                <p class="hint" id="driver-note"></p>
+                <p class="err" id="e-driver"></p>
+              </div>
+
+              <div class="field">
+                <span class="lbl">Trip type</span>
+                <div class="seg" role="radiogroup" aria-label="Trip type">
+                  <label class="seg-opt"><input type="radio" name="trip" value="Within Lahore" checked><span>Within Lahore</span></label>
+                  <label class="seg-opt"><input type="radio" name="trip" value="Outstation"><span>Outstation (another city)</span></label>
+                </div>
+                <p class="hint" id="trip-note"></p>
+              </div>
+
+              <label class="field" id="dest-wrap" hidden><span class="lbl">Destination city</span>
+                <input type="text" id="dest" name="destination" maxlength="80" placeholder="For example: Islamabad, Murree, Multan">
+                <p class="err" id="e-dest"></p>
+              </label>
+
+              <div class="two">
+                <label class="field"><span class="lbl">Purpose</span>
+                  <select id="purpose" name="purpose">
+                    <option value="">Choose one</option>
+                    <option>Wedding</option><option>Tour/Trip</option><option>Airport</option><option>Business</option><option>Family visit</option><option>Other</option>
+                  </select>
+                  <p class="err" id="e-purpose"></p>
+                </label>
+                <div class="field"><span class="lbl">Passengers</span>
+                  <div class="stepper">
+                    <button type="button" id="pax-" aria-label="One less passenger">-</button>
+                    <input type="number" id="pax" name="passengers" min="1" max="4" value="1" inputmode="numeric">
+                    <button type="button" id="pax+" aria-label="One more passenger">+</button>
+                  </div>
+                  <p class="hint" id="pax-note"></p>
+                  <p class="err" id="e-pax"></p>
+                </div>
+              </div>
+            </fieldset>
+
+            <!-- 4. PICKUP -->
+            <fieldset class="card step">
+              <legend><span class="num">4</span> Pickup</legend>
+              <div class="field">
+                <div class="seg" role="radiogroup" aria-label="Pickup">
+                  <label class="seg-opt"><input type="radio" name="pickup" value="Our office" checked><span>Pick up at our office</span></label>
+                  <label class="seg-opt"><input type="radio" name="pickup" value="Deliver to me"><span id="deliver-lbl">Deliver to me</span></label>
+                </div>
+                <p class="hint" id="office-note"></p>
+              </div>
+              <label class="field" id="addr-wrap" hidden><span class="lbl">Pickup area / address</span>
+                <textarea id="address" name="address" rows="2" maxlength="250" placeholder="House, street, area (for example: 12-B, Gulberg III)"></textarea>
+                <p class="err" id="e-addr"></p>
+              </label>
+              <label class="field"><span class="lbl">Pickup time <small>(optional)</small></span>
+                <input type="time" id="time" name="time">
+              </label>
+            </fieldset>
+
+            <!-- 5. ADD-ONS -->
+            <fieldset class="card step" id="addon-step" hidden>
+              <legend><span class="num">5</span> Extras <small>(optional)</small></legend>
+              <div id="addons" class="addons"></div>
+            </fieldset>
+
+            <!-- 6. YOU -->
+            <fieldset class="card step">
+              <legend><span class="num" id="n-you">6</span> About you</legend>
+              <div class="two">
+                <label class="field"><span class="lbl">Your name</span>
+                  <input type="text" id="name" name="name" maxlength="60" autocomplete="name" placeholder="Full name">
+                  <p class="err" id="e-name"></p>
+                </label>
+                <label class="field"><span class="lbl">Mobile number</span>
+                  <input type="tel" id="phone" name="phone" inputmode="numeric" autocomplete="tel" maxlength="12" placeholder="03XX-XXXXXXX">
+                  <p class="hint" id="stamp-note"></p>
+                  <p class="err" id="e-phone"></p>
+                </label>
+              </div>
+              <label class="field"><span class="lbl">Email <small>(optional)</small></span>
+                <input type="email" id="email" name="email" maxlength="80" autocomplete="email" placeholder="you@example.com">
+                <p class="err" id="e-email"></p>
+              </label>
+              <label class="field"><span class="lbl">Notes <small>(optional)</small></span>
+                <textarea id="notes" name="notes" rows="2" maxlength="300" placeholder="Anything we should know? For example: wedding time, luggage, child seat."></textarea>
+              </label>
+              <label class="check" id="confirm-wrap">
+                <input type="checkbox" id="confirm" name="confirm">
+                <span id="confirm-txt">I will show my original CNIC at pickup.</span>
+              </label>
+              <p class="err" id="e-confirm"></p>
+              <p class="hint">We never ask for your CNIC or licence number online. We only look at the originals at pickup.</p>
+              <!-- hidden trap for robots: people never see or fill this -->
+              <div class="hp" aria-hidden="true"><label>Website <input type="text" id="hp" name="website" tabindex="-1" autocomplete="off"></label></div>
+            </fieldset>
+          </div>
+
+          <!-- PRICE SUMMARY -->
+          <aside class="card summary" id="summary" aria-live="polite">
+            <h2>Price summary</h2>
+            <div id="sum-lines"></div>
+            <div class="total-row" id="total-row" hidden>
+              <span>Total to pay us</span>
+              <b class="odo" id="odo"></b>
+            </div>
+            <p class="deposit" id="deposit" hidden></p>
+            <p class="small muted" id="sum-foot">You pay nothing online. We confirm first.</p>
+            <p class="notice err-box2" id="form-msg" hidden></p>
+            <button type="submit" class="btn btn-primary btn-lg btn-block" id="submit">Send my booking</button>
+          </aside>
+        </form>
+      </section>
+
+      <!-- THANK YOU -->
+      <section class="wrap sec" id="done" hidden>
+        <div class="card done-card">
+          <div class="drive-lane" id="drive-lane" aria-hidden="true">
+            <div class="drive-car" id="drive-car"></div>
+            <div class="drive-road"></div>
+          </div>
+          <p class="eyebrow dark">Booking received</p>
+          <h1>Thank you, <span id="d-name"></span>!</h1>
+          <p class="ref-line">Your booking reference <b class="ref-big" id="d-ref"></b></p>
+          <p class="hold-line" id="d-hold"></p>
+          <dl class="done-sum" id="d-sum"></dl>
+          <a class="btn btn-wa btn-xl btn-block" id="d-wa" target="_blank" rel="noopener">Send details on WhatsApp</a>
+          <p class="small muted center-t">Tap the button, then press <b>Send</b> in WhatsApp. The message is already written for you.</p>
+          <div class="row center-row">
+            <a class="btn btn-ghost" href="track.html">Track this booking</a>
+            <a class="btn btn-ghost" href="index.html">Back to home</a>
+            <button type="button" class="btn btn-ghost" id="d-again">Book another car</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/calendar.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/book.js"></script>
+</body>
+</html>

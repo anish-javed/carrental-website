@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Our Fleet - Safar Wheels</title>
+  <meta name="description" content="Hatchbacks, sedans, SUVs, vans, luxury wedding cars and buses for rent in Lahore. See what is free today and compare cars side by side.">
+  <meta name="theme-color" content="#0b1f33">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="fleet">
+  <a class="skip" href="#main">Skip to content</a>
+  <header id="site-header"></header>
+
+  <main id="main">
+    <div id="app">
+      <section class="page-head">
+        <div class="wrap">
+          <p class="eyebrow">Our fleet</p>
+          <h1>Find the right ride</h1>
+          <p class="lead">Tap a heart to save a car. Tick <b>Compare</b> on up to 3 cars to see them side by side.</p>
+        </div>
+      </section>
+
+      <div class="cat-tabs-wrap" id="tabs-wrap">
+        <div class="wrap">
+          <div class="cat-tabs" id="tabs" role="tablist" aria-label="Car categories"></div>
+        </div>
+      </div>
+
+      <section class="wrap sec tight">
+        <div class="card filters">
+          <label class="search-box">
+            <span class="sr">Search cars</span>
+            <input type="search" id="q" placeholder="Search by name, e.g. Corolla" autocomplete="off">
+          </label>
+          <label class="sel"><span>Seats</span>
+            <select id="f-seats">
+              <option value="">Any</option>
+              <option value="1-4">Up to 4</option>
+              <option value="5-6">5 - 6</option>
+              <option value="7-10">7 - 10</option>
+              <option value="11-20">11 - 20</option>
+              <option value="21-99">21 or more</option>
+            </select>
+          </label>
+          <label class="sel"><span>Driver</span>
+            <select id="f-driver">
+              <option value="">Any</option>
+              <option value="self">Self-drive possible</option>
+              <option value="driver">With driver only</option>
+            </select>
+          </label>
+          <label class="sel"><span>Price per day</span>
+            <select id="f-price">
+              <option value="">Any</option>
+              <option value="5000">Up to Rs 5,000</option>
+              <option value="8000">Up to Rs 8,000</option>
+              <option value="12000">Up to Rs 12,000</option>
+              <option value="20000">Up to Rs 20,000</option>
+              <option value="999999">Rs 20,000 and more</option>
+            </select>
+          </label>
+          <label class="sel"><span>Sort by</span>
+            <select id="f-sort">
+              <option value="pop">Most popular</option>
+              <option value="low">Price: low to high</option>
+              <option value="high">Price: high to low</option>
+              <option value="seats">Most seats</option>
+            </select>
+          </label>
+          <label class="check small"><input type="checkbox" id="f-fav"><span>Favourites only</span></label>
+          <button type="button" class="btn btn-ghost btn-sm" id="f-reset">Reset</button>
+        </div>
+
+        <div class="compare-bar" id="cmp-bar" hidden>
+          <div id="cmp-chips"></div>
+          <div class="row">
+            <button type="button" class="btn btn-pink btn-sm" id="cmp-go">Compare now</button>
+            <button type="button" class="btn btn-ghost btn-sm" id="cmp-clear">Clear</button>
+          </div>
+        </div>
+        <div class="card cmp-panel" id="cmp-panel" hidden></div>
+
+        <p class="muted" id="count" aria-live="polite"></p>
+        <div class="grid cars" id="grid"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="site-footer"></footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/art.js"></script>
+  <script src="js/pricing.js"></script>
+  <script src="js/demo.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/cards.js"></script>
+  <script src="js/fleet.js"></script>
+</body>
+</html>
