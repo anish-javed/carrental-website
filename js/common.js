@@ -201,7 +201,7 @@
         '<p class="muted-on-dark">Cars, vans and buses for weddings, trips and business in Lahore. You pay nothing online.</p></div>' +
         '<div><h4>Explore</h4>' + NAV.map(function (n) { return '<a href="' + n[0] + '">' + n[1] + "</a>"; }).join("") + "</div>" +
         '<div><h4>Contact</h4><p data-f="phone"></p><p data-f="address"></p><p data-f="hours"></p></div></div>' +
-        '<div class="wrap foot-demo"><p>' + SW.esc(cfg.DEMO_LINE || "This is a demo website.") + "</p></div>";
+        '<div class="wrap foot-demo"><p>' + SW.esc(cfg.DEMO_LINE || "This is a demo website.") + '</p><p class="credit">Photos: <a href="https://www.pexels.com" target="_blank" rel="noopener">Pexels</a></p></div>';
     }
     if (!document.getElementById("wa-float")) {
       var wa = document.createElement("a");

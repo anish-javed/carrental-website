@@ -1,4 +1,4 @@
-/* Drawn pictures: icons, car silhouettes by body type (no brand logos), jingle truck, flowers, gauges. */
+/* Drawn pictures: icons, car silhouettes by body type (no brand logos), flowers, gauges. */
 (function () {
   var SW = (window.SW = window.SW || {});
 
@@ -58,6 +58,18 @@
     minibus: { x0: 8, x1: 234, wy: 76, wheels: [50, 198],
       d: "M8 76 L8 24 Q8 14 20 14 L172 14 Q184 14 190 24 L206 50 L224 55 Q234 57 234 68 L234 76 Z",
       glass: ["M16 22 L40 22 L40 44 L16 44 Z", "M46 22 L70 22 L70 44 L46 44 Z", "M76 22 L100 22 L100 44 L76 44 Z", "M106 22 L130 22 L130 44 L106 44 Z", "M136 22 L160 22 L160 44 L136 44 Z", "M166 22 L174 22 Q179 22 183 29 L196 46 L166 46 Z"] },
+    landcruiser: { x0: 14, x1: 228, wy: 76, wheels: [58, 184],
+      d: "M14 76 L14 40 Q14 33 22 32 L44 30 L146 30 Q154 30 160 37 L176 49 L214 52 Q226 54 227 62 L228 76 Z",
+      glass: ["M26 37 L54 36 L54 51 L22 51 Z", "M60 36 L98 36 L98 51 L60 51 Z", "M104 36 L145 36 Q151 36 155 41 L168 51 L104 51 Z"],
+      extra: '<path d="M40 27.500 H148" stroke="#9aa3ad" stroke-width="2.500" stroke-linecap="round"/><path d="M221 56 L226 58 L227 68 L221 68 Z" fill="#0b1f33" opacity=".7"/><path d="M76 66 H166" stroke="#0b1f33" stroke-opacity=".25" stroke-width="2"/>' },
+    fortuner: { x0: 16, x1: 228, wy: 76, wheels: [58, 184],
+      d: "M16 76 L16 50 Q16 44 24 41 L58 31 L140 31 Q150 31 156 38 L178 52 L214 56 Q228 58 228 68 L228 76 Z",
+      glass: ["M28 43 L56 35 L56 51 L22 51 Z", "M62 34 L98 34 L98 51 L62 51 Z", "M104 34 L138 34 Q146 34 151 40 L166 51 L104 51 Z"],
+      extra: '<path d="M62 28.500 H138" stroke="#9aa3ad" stroke-width="2.200" stroke-linecap="round"/><path d="M222 58 L227 60 L228 69 L222 69 Z" fill="#0b1f33" opacity=".7"/>' },
+    coaster: { x0: 8, x1: 234, wy: 76, wheels: [52, 196],
+      d: "M8 76 L8 22 Q8 12 18 12 L200 12 Q208 12 212 20 L226 50 Q234 52 234 66 L234 76 Z",
+      glass: ["M16 22 L40 22 L40 46 L16 46 Z", "M46 22 L70 22 L70 46 L46 46 Z", "M76 22 L100 22 L100 46 L76 46 Z", "M106 22 L130 22 L130 46 L106 46 Z", "M136 22 L160 22 L160 46 L136 46 Z", "M166 22 L190 22 L190 46 L166 46 Z", "M196 20 L203 20 Q206 20 208 25 L218 46 L196 46 Z"],
+      extra: '<path d="M8 55 H230" stroke="#0e6b6f" stroke-width="3"/><path d="M228 56 L233 58 L234 68 L228 68 Z" fill="#0b1f33" opacity=".7"/>' },
     coach: { x0: 4, x1: 238, wy: 78, wheels: [44, 84, 198],
       d: "M4 78 L4 22 Q4 10 16 10 L188 10 Q200 10 206 20 L222 48 L232 54 Q238 56 238 68 L238 78 Z",
       glass: ["M12 18 L32 18 L32 38 L12 38 Z", "M38 18 L58 18 L58 38 L38 38 Z", "M64 18 L84 18 L84 38 L64 38 Z", "M90 18 L110 18 L110 38 L90 38 Z", "M116 18 L136 18 L136 38 L116 38 Z", "M142 18 L162 18 L162 38 L142 38 Z", "M168 18 L188 18 L188 38 L168 38 Z", "M194 18 L198 18 Q203 18 206 24 L214 42 L194 42 Z"] }
@@ -85,11 +97,12 @@
 
   SW.carSvg = function (body, o) {
     o = o || {};
-    var s = SHAPES[body] || SHAPES.sedan, col = o.color || "#0e6b6f", acc = o.accent || "#f6a91b", wy = s.wy;
+    var s = SHAPES[body] || SHAPES.sedan, col = o.color || "#0e6b6f", acc = o.accent || "#f6a91b", glass = o.glass || "#dff3f1", wy = s.wy;
     var h = '<svg class="car-svg" viewBox="0 0 240 100" role="img" aria-label="' + SW.esc(o.label || "Car") + '" xmlns="http://www.w3.org/2000/svg">';
     h += '<ellipse cx="120" cy="93" rx="106" ry="4" fill="#0b1f33" opacity=".14"/>';
     h += '<path d="' + s.d + '" fill="' + col + '" stroke="#0b1f33" stroke-opacity=".35" stroke-width="1.500" stroke-linejoin="round"/>';
-    s.glass.forEach(function (g) { h += '<path d="' + g + '" fill="#dff3f1" opacity=".93" stroke="#0b1f33" stroke-opacity=".25" stroke-width="1" stroke-linejoin="round"/>'; });
+    s.glass.forEach(function (g) { h += '<path d="' + g + '" fill="' + glass + '" opacity=".93" stroke="#0b1f33" stroke-opacity=".25" stroke-width="1" stroke-linejoin="round"/>'; });
+    if (s.extra) h += s.extra;
     h += '<path d="M' + (s.x0 + 8) + " " + (wy - 7) + " H" + (s.x1 - 10) + '" stroke="' + acc + '" stroke-width="2.600" stroke-dasharray="1 6" stroke-linecap="round"/>';
     h += '<rect x="' + (s.x1 - 9) + '" y="' + (wy - 17) + '" width="7" height="5" rx="2" fill="#ffe89a" class="hl"/>';
     h += '<rect x="' + (s.x0 + 1) + '" y="' + (wy - 21) + '" width="4" height="8" rx="2" fill="#e8318a"/>';
@@ -98,30 +111,6 @@
       h += '<g class="wheel"><circle cx="' + x + '" cy="' + wy + '" r="13" fill="#1c2a38"/><circle cx="' + x + '" cy="' + wy + '" r="6.500" fill="#efe4cf"/>';
       h += '<path d="M' + x + " " + (wy - 6) + " V" + (wy + 6) + " M" + (x - 6) + " " + wy + " H" + (x + 6) + '" stroke="#1c2a38" stroke-width="1.600"/></g>';
     });
-    return h + "</svg>";
-  };
-
-  /* ---------- jingle truck (truck-art style) ---------- */
-  SW.truckSvg = function () {
-    var h = '<svg class="truck-svg" viewBox="0 0 330 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">';
-    h += '<rect x="8" y="94" width="300" height="10" rx="3" fill="#1b2433"/>';
-    h += '<rect x="14" y="42" width="180" height="54" rx="5" fill="#e8318a" stroke="#0b1f33" stroke-width="2"/>';
-    h += '<rect x="22" y="50" width="164" height="38" rx="3" fill="#f6a91b"/>';
-    for (var i = 0; i < 5; i++) {
-      var cx = 40 + i * 34;
-      h += '<circle cx="' + cx + '" cy="69" r="13" fill="#0e6b6f"/><circle cx="' + cx + '" cy="69" r="8" fill="#fff6e5"/><circle cx="' + cx + '" cy="69" r="3.500" fill="#e8318a"/>';
-    }
-    h += '<path d="M14 42h180" stroke="#0e6b6f" stroke-width="5" stroke-dasharray="6 5"/>';
-    h += '<path d="M196 98V62a6 6 0 0 1 6-6h50l22 22 14 4a6 6 0 0 1 4 6v10z" fill="#0e6b6f" stroke="#0b1f33" stroke-width="2"/>';
-    h += '<path d="M206 62h40l14 16h-54z" fill="#dff3f1"/>';
-    h += '<path d="M198 58V34Q238 2 282 30L282 56Z" fill="#e8318a" stroke="#0b1f33" stroke-width="2" transform="translate(-14 -4) scale(.88 .9) translate(26 14)"/>';
-    h += '<circle cx="232" cy="38" r="9" fill="#f6a91b"/><circle cx="232" cy="38" r="4.500" fill="#0e6b6f"/>';
-    h += '<path d="M200 28Q234 4 268 28" fill="none" stroke="#f6a91b" stroke-width="3" stroke-dasharray="2 5" stroke-linecap="round"/>';
-    h += '<path d="M16 100h176" stroke="#f6a91b" stroke-width="3" stroke-dasharray="1 7" stroke-linecap="round"/>';
-    [[50, 112], [92, 112], [246, 112]].forEach(function (p) {
-      h += '<g class="wheel"><circle cx="' + p[0] + '" cy="' + p[1] + '" r="18" fill="#1b2433"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="9" fill="#f6a91b"/><circle cx="' + p[0] + '" cy="' + p[1] + '" r="3.500" fill="#e8318a"/></g>';
-    });
-    h += '<rect x="304" y="82" width="8" height="8" rx="3" fill="#ffe89a"/>';
     return h + "</svg>";
   };
 
@@ -140,22 +129,23 @@
       '<line class="g-needle" x1="60" y1="62" x2="60" y2="24" stroke-width="3" stroke-linecap="round"/><circle cx="60" cy="62" r="5"/></svg>';
   };
 
-  // Picture of a car: its photo if there is one, otherwise the drawn silhouette.
+  // Picture of a car: the drawing is always there; the photo (if there is one) fades in over it once it has loaded.
+  // If the photo fails, it is removed and the drawing stays.
   SW.carArt = function (car) {
     var svg = SW.carSvg(SW.bodyOf(car), { color: SW.carColor(car.id), label: car.name });
+    var img = "";
     if (car.photo && /^https?:\/\//i.test(car.photo)) {
-      return '<img class="car-photo" src="' + SW.esc(car.photo) + '" alt="' + SW.esc(car.name) + '" loading="lazy" referrerpolicy="no-referrer" data-fb="' + SW.esc(svg) + '">';
+      img = '<img class="car-photo" src="' + SW.esc(car.photo) + '" alt="' + SW.esc(car.name) + '" loading="lazy" decoding="async" referrerpolicy="no-referrer">';
     }
-    return svg;
+    return '<span class="car-pic">' + svg + img + "</span>";
   };
-  // If a photo link is broken, swap in the drawing.
+  // load and error do not bubble, so listen in the capture phase.
+  document.addEventListener("load", function (e) {
+    var t = e.target;
+    if (t && t.tagName === "IMG" && t.classList.contains("car-photo")) t.classList.add("loaded");
+  }, true);
   document.addEventListener("error", function (e) {
     var t = e.target;
-    if (t && t.tagName === "IMG" && t.getAttribute("data-fb")) {
-      var wrap = document.createElement("span");
-      wrap.className = "svg-wrap";
-      wrap.innerHTML = t.getAttribute("data-fb");
-      if (t.parentNode) t.parentNode.replaceChild(wrap, t);
-    }
+    if (t && t.tagName === "IMG" && t.classList.contains("car-photo") && t.parentNode) t.parentNode.removeChild(t);
   }, true);
 })();

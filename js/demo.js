@@ -43,7 +43,7 @@
     "Address": "Demo Plaza, Main Boulevard, Lahore", "Opening Hours": "Every day: 8 am - 10 pm",
     "Online Booking Discount %": 5, "Long Rental Discount 3-6 Days %": 5, "Long Rental Discount 7+ Days %": 10,
     "Stamp Card Size": 5, "Stamp Reward Discount %": 10, "Max Total Discount %": 20, "Outstation Extra %": 15,
-    "Delivery Fee": 1000, "Hold Hours for Pending": 24, "Max Rental Days": 30, "Max Days Ahead": 180, "Accepting Bookings": "Yes",
+    "Delivery Fee": 1000, "Hold Hours for Pending": 24, "Max Rental Days": 30, "Max Days Ahead": 180, "Accepting Bookings": "Yes", "Stat Trips": 2500, "Stat Happy Customers %": 98, "Stat Years": 12,
     "Rental Term 1": "Documents at pickup: please bring your original CNIC. For a self-drive rental, also bring your original driving licence. We only look at them.",
     "Rental Term 2": "Fuel and motorway tolls are not included in the price.",
     "Rental Term 3": "Kilometre limit: 250 km per day. After that, extra kilometres are charged at Rs 40 per km.",

@@ -69,6 +69,13 @@ var ADDON_ROWS = [
   ['Microphone and sound system', 3000, 'One time', 'Commercial & Buses', 'Yes']
 ];
 
+// The three numbers on the home page. Leave a Value empty to hide that number on the website.
+var STAT_ROWS = [
+  ['Stat Trips', 2500, 'Home page: number of trips completed (shown as 2500+). Leave empty to hide it.'],
+  ['Stat Happy Customers %', 98, 'Home page: percent of happy customers (numbers only). Leave empty to hide it.'],
+  ['Stat Years', 12, 'Home page: years on the road (numbers only). Leave empty to hide it.']
+];
+
 var SETTING_ROWS = [
   ['Company Name', 'Safar Wheels', 'The name shown on the website.'],
   ['Phone', '0300 0000000', 'Phone number shown on the website. Replace it with your real number.'],
@@ -94,7 +101,7 @@ var SETTING_ROWS = [
   ['Rental Term 5', 'Days are counted from the pickup date to the return date, and both days count.', ''],
   ['Rental Term 6', 'The self-drive deposit is paid at pickup and is refunded when the car comes back in good condition.', ''],
   ['Rental Term 7', 'You pay nothing online. We confirm your booking by phone or WhatsApp, and you pay us directly.', '']
-];
+].concat(STAT_ROWS);
 
 /* ======================================================================
    SETUP  (run once; safe to run again, it never deletes your data)
@@ -241,6 +248,25 @@ function setupSettings_(ss) {
   sh.getRange(2, 2, 200, 2).setWrap(true);
   var vals = sh.getRange(2, 1, Math.max(1, sh.getLastRow() - 1), 1).getValues();
   for (var i = 0; i < vals.length; i++) if (norm_(vals[i][0]) === 'acceptingbookings') sh.getRange(i + 2, 2).setDataValidation(listRule_(['Yes', 'No'], false));
+}
+
+// Run this once on a sheet you already have: it adds the three Stat rows to the Settings tab.
+// It never changes or removes any other row.
+function addStatSettings() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sh = ss.getSheetByName(TAB.SETTINGS);
+  if (!sh) { setup(); return; }
+  var existing = {};
+  if (sh.getLastRow() > 1) sh.getRange(2, 1, sh.getLastRow() - 1, 1).getValues().forEach(function (r) { existing[norm_(r[0])] = true; });
+  var add = STAT_ROWS.filter(function (r) { return !existing[norm_(r[0])]; });
+  if (add.length) {
+    var start = sh.getLastRow() + 1;
+    sh.getRange(start, 2, add.length, 1).setNumberFormat('@');
+    sh.getRange(start, 1, add.length, 3).setValues(add.map(function (r) { return [r[0], String(r[1]), r[2]]; }));
+  }
+  CacheService.getScriptCache().remove('base_v2');
+  var msg = add.length ? 'Added ' + add.length + ' new row(s) to the Settings tab. Nothing else was changed.' : 'The Stat rows are already in the Settings tab. Nothing was changed.';
+  try { SpreadsheetApp.getUi().alert(msg); } catch (e) { console.log(msg); }
 }
 
 /* ======================================================================

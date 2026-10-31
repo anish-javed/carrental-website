@@ -30,7 +30,9 @@
     Object.keys(raw || {}).forEach(function (k) { m[k.toLowerCase().replace(/[^a-z0-9]/g, "")] = raw[k]; });
     function s(k, d) { var v = m[k]; return v === undefined || v === null || String(v).trim() === "" ? d : String(v).trim(); }
     function n(k, d) { var v = parseFloat(String(m[k]).replace(/[^0-9.]/g, "")); return isNaN(v) ? d : v; }
-    var wa = s("whatsappnumber", "923000000000").replace(/\D/g, "");
+    // Home page stats: a number, or null (hidden) when the cell is empty.
+    function opt(k) { var v = parseFloat(String(m[k]).replace(/[^0-9.]/g, "")); return isNaN(v) ? null : v; }
+    var wa = s("whatsappnumber","923000000000").replace(/\D/g, "");
     if (wa.charAt(0) === "0") wa = "92" + wa.slice(1);
     var terms = Object.keys(m).filter(function (k) { return /^rentalterm\d*$/.test(k) && String(m[k]).trim() !== ""; })
       .sort(function (a, b) { return (parseInt(a.replace(/\D/g, ""), 10) || 0) - (parseInt(b.replace(/\D/g, ""), 10) || 0); })
@@ -53,6 +55,9 @@
       maxDays: Math.max(1, Math.floor(n("maxrentaldays", 30))),
       maxAhead: Math.max(1, Math.floor(n("maxdaysahead", 180))),
       accepting: ["no", "n", "false", "0"].indexOf(s("acceptingbookings", "Yes").toLowerCase()) === -1,
+      statTrips: opt("stattrips"),
+      statHappy: opt("stathappycustomers"),
+      statYears: opt("statyears"),
       terms: terms
     };
   }

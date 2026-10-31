@@ -6,8 +6,10 @@
     var set = data.settings, today = D.today();
 
     /* ---------- hero ---------- */
-    SW.$("#hero-car").innerHTML = SW.carSvg("suv", { color: "#e8318a", label: "" });
-    SW.$("#truck").innerHTML = SW.truckSvg();
+    SW.$("#hero-car").innerHTML = SW.carSvg("landcruiser", { color: "#f3f0ea", glass: "#27394d", label: "" });
+    SW.$("#lane-lc").innerHTML = SW.carSvg("landcruiser", { color: "#f3f0ea", glass: "#27394d", label: "" });
+    SW.$("#lane-fo").innerHTML = SW.carSvg("fortuner", { color: "#5b6b80", glass: "#dff3f1", label: "" });
+    SW.$("#lane-co").innerHTML = SW.carSvg("coaster", { color: "#f6f6f2", glass: "#27394d", label: "" });
     SW.$("#hp-disc").innerHTML = SW.icon("tag", "ic-s") + " Extra " + set.onlinePct + "% off when you book online";
     SW.$("#hp-hold").innerHTML = SW.icon("clock", "ic-s") + " Your dates are held for " + set.holdHours + " hours";
     SW.$("#hp-stamp").innerHTML = SW.icon("gift", "ic-s") + " Every " + ordinal(set.stampSize) + " rental earns " + set.stampPct + "% off";
@@ -69,7 +71,9 @@
     }).join("");
 
     /* ---------- speedometers and trust points ---------- */
-    var g = [[2500, "+", "Trips completed", 0.86], [data.cars.length, "", "Cars, vans & buses", 0.62], [98, "%", "Happy customers", 0.98], [12, " yrs", "On the road", 0.5]];
+    // Trips, happy customers and years come from the Settings tab. An empty value hides that stat.
+    var g = [[set.statTrips, "+", "Trips completed", 0.86], [data.cars.length, "", "Cars, vans & buses", 0.62], [set.statHappy, "%", "Happy customers", 0.98], [set.statYears, " yrs", "On the road", 0.5]]
+      .filter(function (x) { return x[0] !== null && x[0] !== undefined; });
     SW.$("#gauges").innerHTML = g.map(function (x) {
       return '<div class="gauge">' + SW.gaugeSvg(x[3]) + '<b data-count="' + x[0] + '" data-suffix="' + x[1] + '">0</b><span>' + x[2] + "</span></div>";
     }).join("");
